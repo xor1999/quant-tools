@@ -56,17 +56,17 @@ def call_theta(S, K, T, r, q, sigma):
     d2 = _d2(S, K, T, r, q, sigma)
     term1 = -S * np.exp(-q * T) * stats.norm.pdf(d1) * sigma / (2 * np.sqrt(T))
     term2 = q * S * np.exp(-q * T) * stats.norm.cdf(d1)
-    term3 = -r * K * np.exp(-r * T) * stats.norm.cdf(d2)
-    return term1 - term2 - term3
+    term3 = r * K * np.exp(-r * T) * stats.norm.cdf(d2)
+    return term1 + term2 - term3
 
 
 def put_theta(S, K, T, r, q, sigma):
     d1 = _d1(S, K, T, r, q, sigma)
     d2 = _d2(S, K, T, r, q, sigma)
     term1 = -S * np.exp(-q * T) * stats.norm.pdf(d1) * sigma / (2 * np.sqrt(T))
-    term2 = -q * S * np.exp(-q * T) * stats.norm.cdf(-d1)
+    term2 = q * S * np.exp(-q * T) * stats.norm.cdf(-d1)
     term3 = r * K * np.exp(-r * T) * stats.norm.cdf(-d2)
-    return term1 + term2 + term3
+    return term1 - term2 + term3
 
 
 def call_rho(S, K, T, r, q, sigma):
